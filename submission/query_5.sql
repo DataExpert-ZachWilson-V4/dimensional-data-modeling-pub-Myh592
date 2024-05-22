@@ -32,7 +32,7 @@ WITH
 
           ly.is_active as is_active_last_year,
           cy.is_active as is_active_this_year,
-          ly.quality_class as quality_class_last_year
+          ly.quality_class as quality_class_last_year,
           cy.quality_class as quality_class_this_year,
           2002 as current_year
     FROM
