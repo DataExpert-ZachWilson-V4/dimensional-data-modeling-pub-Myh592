@@ -61,8 +61,8 @@ WITH
 
         END as films,
     COALESCE(ty.quality_class, ly.quality_class) as quality_class,
-    ty.year IS NOT NULL as is_active,
-    COALESCE(ty.year, ly.year + 1) as year
+    (ty.year IS NOT NULL) as is_active,
+    ty.year as current_year
     FROM last_year ly
     FULL OUTER JOIN This_year ty
     ON ly.actor_ID = ty.actor_ID
