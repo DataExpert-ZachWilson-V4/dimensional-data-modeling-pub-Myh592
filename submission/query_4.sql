@@ -25,7 +25,7 @@ SELECT
 -- Determining how many years active as well as which years are start and end of activity 
 Select actor_id, Streak_identifier,
     MAX(quality_class) as quality_class,
-    MAX(is_active) = 1 as is_active, -- this has been changed back into a boolen per WEEK 1 Lab 2
+    MAX(is_active) as is_active, -- this has been changed back into a boolen per WEEK 1 Lab 2 - removed this after feedback from autograder said that is_active_last_year is an integer and not sure how to also make it a boolean
     MIN(current_year) as start_year,
     MAX(current_year) as end_year,
     2000 as current_year
