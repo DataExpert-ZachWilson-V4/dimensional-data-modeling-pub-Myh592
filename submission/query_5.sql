@@ -24,9 +24,16 @@ WITH
         CASE
           WHEN ly.is_active <> cy.is_active THEN 1
           WHEN ly.is_active = cy.is_active THEN 0
-          END as did_change
+          END as did_change,
+        CASE   
+          WHEN ly.quality_class <> cy.quality_class THEN 1
+          WHEN ly.quality_class = cy.quality_class THEN 0
+          END as qc_did_change,
+
           ly.is_active as is_active_last_year,
           cy.is_active as is_active_this_year,
+          ly.quality_class as quality_class_last_year
+          cy.quality_class as quality_class_this_year,
           2002 as current_year
     FROM
         last_year_scd ly
@@ -90,6 +97,7 @@ WITH
     )
     SELECT
     actor_id,
+    ARR.quality_class,
     ARR.is_active,
     ARR.start_year,
     ARR.end_year,
