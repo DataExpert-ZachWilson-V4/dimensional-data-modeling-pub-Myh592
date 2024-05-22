@@ -8,72 +8,59 @@ WITH
         WHERE
             current_year = 1999
         ),
-    This_year_temp AS (
+    this_year_temp AS (
         SELECT
             actor,
             actor_id,
+            year,
             -- Aggregating all films for an actor in one year
-            Array_AGG(ROW(
-                Year,
+            ARRAY_AGG(ROW(
+                year,
                 film,
                 votes,
                 rating,
                 film_id
-                )) AS Films,
-                AVG(rating) as avg_Rating
+                )) AS films,
+            AVG(rating) AS avg_rating
         FROM
             bootcamp.actor_films
         WHERE
             year = 2000
         GROUP BY
-            Actor,
-            actor_ID,
+            actor,
+            actor_id,
             year
     ), 
-    This_year as(
-        SELECT actor,
-        actor_id,
-        year,
-        films,
-        Case when avg_Rating > 8 THEN 'star'
-        when avg_Rating > 7 then 'Good'
-        when avg_Rating > 6 then 'average'
-        else 'bad' end as quality_class
-        from This_year_temp
-
+    this_year AS (
+        SELECT 
+            actor,
+            actor_id,
+            year,
+            films,
+            CASE 
+                WHEN avg_rating > 8 THEN 'star'
+                WHEN avg_rating > 7 THEN 'good'
+                WHEN avg_rating > 6 THEN 'average'
+                ELSE 'bad' 
+            END AS quality_class
+        FROM 
+            this_year_temp
     )
-
 -- COALESCE all the values that are not changing to handle NULLS
-    SELECT
-    COALESCE(ly.actor, ty.actor) as actor,
-    COALESCE(ly.actor_ID, ty.actor_ID) as actor_ID,
+SELECT
+    COALESCE(ly.actor, ty.actor) AS actor,
+    COALESCE(ly.actor_id, ty.actor_id) AS actor_id,
     CASE 
         WHEN ty.year IS NULL THEN ly.films 
-        WHEN ty.year IS NOT NULL and ly.films IS NULL THEN 
-        Array[
-            ROW(
-            ty.year, 
-            ty.film,
-            ty.votes,
-            ty.rating,
-            ty.film_id
-            )
-        ]
-        WHEN ty.year IS NOT NULL and ly.films IS NOT NULL THEN
-        Array[
-            ROW(
-            ty.year,
-            ty.film,
-            ty.votes,
-            ty.rating,
-            ty.film_id
-            )
-            ] || ly.films
-        END as films,
-    COALESCE(ty.quality_class, ly.quality_class) as quality_class,
-    ty.year IS NOT NULL as is_active,
-    COALESCE(ty.year, ly.year + 1) as year
-    FROM last_year ly
-    FULL OUTER JOIN This_year ty
-    ON ly.actor_ID = ty.actor_ID
-
+        WHEN ty.year IS NOT NULL AND ly.films IS NULL THEN 
+            ty.films
+        WHEN ty.year IS NOT NULL AND ly.films IS NOT NULL THEN
+            ty.films || ly.films
+    END AS films,
+    COALESCE(ty.quality_class, ly.quality_class) AS quality_class,
+    ty.year IS NOT NULL AS is_active,
+    COALESCE(ty.year, ly.year + 1) AS year
+FROM 
+    last_year ly
+    FULL OUTER JOIN this_year ty
+    ON ly.actor_id = ty.actor_id;
