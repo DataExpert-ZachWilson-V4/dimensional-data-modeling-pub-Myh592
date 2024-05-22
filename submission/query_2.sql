@@ -12,7 +12,7 @@ WITH
         WHERE
             current_year = 1999
         ),
-    This_year_temp AS (
+    This_year AS (
         SELECT
             a.actor,
             a.actor_id,
@@ -34,19 +34,6 @@ WITH
             a.Actor,
             a.actor_ID,
             a.year
-    ), -- temporary table set up data then averages calculated in following. 
-    This_year as(
-        SELECT actor,
-        actor_id,
-        year,
-        film,
-        films,
-        Case when avg_Rating > 8 THEN 'star'
-        when avg_Rating > 7 then 'Good'
-        when avg_Rating > 6 then 'average'
-        else 'bad' end as quality_class
-        from This_year_temp
-
     )
 
 -- COALESCE all the values that are not changing to handle NULLS
@@ -76,7 +63,13 @@ WITH
             )
             ] || ly.films
         END as films,
-    COALESCE(ty.quality_class, ly.quality_class) as quality_class,
+    COALESCE(
+    CASE
+        when avg_Rating > 8 THEN 'star'
+        when avg_Rating > 7 then 'Good'
+        when avg_Rating > 6 then 'average'
+        else 'bad' end,
+    ly.quality_class) as quality_class,
     ty.year IS NOT NULL as is_active,
     COALESCE(ty.year, ly.year + 1) as year
     FROM last_year ly
