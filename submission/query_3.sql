@@ -1,4 +1,4 @@
-Creat table mymah592.actors_history_scd (
+Create table mymah592.actors_history_scd (
     actor VARCHAR,
     actor_id VARCHAR,
     quality_class VARCHAR,
