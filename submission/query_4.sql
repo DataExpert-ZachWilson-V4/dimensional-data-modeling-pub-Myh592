@@ -4,8 +4,9 @@ WITH lagged AS(
 
 Select 
     actor_id,
-    is_active, 
-CASE WHEN LAG(is_active,1 ) OVER (PARTITION BY actor_id ORDER BY current_year) THEN 1 ELSE 0 END As is_active_last_year,
+    is_active,
+LAG(is_active,1 ) OVER (PARTITION BY actor_id ORDER BY current_year) As is_active_last_year, 
+    quality_class,
 LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) as quality_class_last_year,
 current_year
 From mymah592.actors
