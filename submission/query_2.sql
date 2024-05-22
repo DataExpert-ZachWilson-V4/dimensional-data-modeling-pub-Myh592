@@ -2,11 +2,7 @@ INSERT INTO mymah592.Actors
 WITH 
     last_year AS (
         SELECT 
-            Actor,
-            actor_ID,
-            films,
-            quality_class,
-            is_active,
+            *
         FROM
             mymah592.actors
         WHERE
