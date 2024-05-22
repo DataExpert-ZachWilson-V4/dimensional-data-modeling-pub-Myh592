@@ -6,7 +6,7 @@ Select
     actor_id,
     is_active, 
 CASE WHEN LAG(is_active,1 ) OVER (PARTITION BY actor_id ORDER BY current_year) THEN 1 ELSE 0 END As is_active_last_year,
-LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) as quality_class_last_year,
+CASE WHEN LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) THEN 1 ELSE 0 END as quality_class_last_year,
 current_year
 From mymah592.actors
 WHERE current_year <= 1999
@@ -16,8 +16,8 @@ Streaked AS(
 SELECT
   *,
   SUM(CASE 
-        WHEN is_active <> is_active_last_year THEN 1
-        WHEN quality_class <> quality_class_last_year THEN 1 
+        WHEN (is_active <> is_active_last_year) THEN 1
+        WHEN (quality_class <> quality_class_last_year) THEN 1 
       ELSE 0 END)
     OVER(PARTITION BY actor_id ORDER BY current_year) AS Streak_identifier
     FROM lagged
