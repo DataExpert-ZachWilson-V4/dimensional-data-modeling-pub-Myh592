@@ -4,14 +4,13 @@ WITH lagged AS(
 
 Select 
     actor_id,
-    is_active,
-LAG(is_active,1 ) OVER (PARTITION BY actor_id ORDER BY current_year) As is_active_last_year, 
-    quality_class,
+    is_active, 
+CASE WHEN LAG(is_active,1 ) OVER (PARTITION BY actor_id ORDER BY current_year) THEN 1 ELSE 0 END As is_active_last_year,
 LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) as quality_class_last_year,
 current_year
 From mymah592.actors
 WHERE current_year <= 1999
-),
+)
 -- breaking out streak case statement on its own for neatness
 Streaked AS(
 SELECT
@@ -26,10 +25,9 @@ SELECT
 -- Determining how many years active as well as which years are start and end of activity 
 Select actor_id, Streak_identifier,
     MAX(quality_class) as quality_class,
-    MAX(is_active) as is_active, -- this has been changed back into a boolen per WEEK 1 Lab 2 - removed this after feedback from autograder said that is_active_last_year is an integer and not sure how to also make it a boolean
+    MAX(is_active) = 1 as is_active, -- this has been changed back into a boolen per WEEK 1 Lab 2
     MIN(current_year) as start_year,
     MAX(current_year) as end_year,
     2000 as current_year
     FROM streaked
     GROUP BY actor_id, Streak_identifier
--- edit troubleshooting pull request
