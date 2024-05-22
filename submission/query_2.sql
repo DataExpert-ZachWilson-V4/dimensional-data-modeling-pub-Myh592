@@ -57,16 +57,8 @@ WITH
         WHEN ty.year IS NULL THEN ly.films 
         WHEN ty.year IS NOT NULL and ly.films IS NULL THEN ty.films
        
-        WHEN ty.year IS NOT NULL and ly.films IS NOT NULL THEN
-        Array[
-            ROW(
-            ty.year,
-            ty.film,
-            ty.votes,
-            ty.rating,
-            ty.film_id
-            )
-            ] || ly.films
+        WHEN ty.year IS NOT NULL and ly.films IS NOT NULL THEN ly.files || ty.films
+
         END as films,
     COALESCE(ty.quality_class, ly.quality_class) as quality_class,
     ty.year IS NOT NULL as is_active,
