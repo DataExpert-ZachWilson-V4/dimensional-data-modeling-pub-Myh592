@@ -83,7 +83,7 @@ WITH
                     )
                 )
             ]
-            WHEN did_change Change IS NULL Then ARRAY[
+            WHEN did_change IS NULL Then ARRAY[
                 CAST(
                     ROW(
                         COALESCE(is_active_last_year, is_active_this_year),
