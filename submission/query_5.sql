@@ -22,12 +22,12 @@ WITH
         COALESCE(ly.start_year, cy.start_year) AS start_year,
         COALESCE(ly.end_year, cy.end_year) AS end_year,
         CASE
-          WHEN ly.is_active <> cy.is_active THEN 1
-          WHEN ly.is_active = cy.is_active THEN 0
+          WHEN (ly.is_active <> cy.is_active) THEN 1
+          WHEN (ly.is_active = cy.is_active) THEN 0
           END as did_change,
         CASE   
-          WHEN ly.quality_class <> cy.quality_class THEN 1
-          WHEN ly.quality_class = cy.quality_class THEN 0
+          WHEN (ly.quality_class <> cy.quality_class) THEN 1
+          WHEN (ly.quality_class = cy.quality_class) THEN 0
           END as qc_did_change,
 
           ly.is_active as is_active_last_year,
