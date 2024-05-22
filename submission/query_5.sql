@@ -51,8 +51,8 @@ WITH
                         is_active_last_year,
                         quality_class_last_year,
                         start_year,
-                        end_year +1,
-                        ) AS ROW(
+                        end_year +1) 
+                    AS ROW(
                             is_active BOOLEAN,
                             quality_class VARCHAR,
                             start_year INTEGER,
