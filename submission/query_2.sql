@@ -13,39 +13,28 @@ WITH
         WHERE
             current_year = 1999
         ),
-    This_year_temp AS (
-        SELECT
-            actor,
-            actor_id,
-            year,
-            -- Aggregating all films for an actor in one year
-            Array_AGG(ROW(
+    This_year as(
+        SELECT actor,
+        actor_id,
+        year,
+          Array_AGG(ROW(
                 Year,
                 film,
                 votes,
                 rating,
                 film_id
                 )) AS Films,
-                AVG(rating) as avg_Rating
-        FROM
-            bootcamp.actor_films
-        WHERE
-            year = 2000
-        GROUP BY
-            Actor,
-            actor_ID,
-            year
-    ), 
-    This_year as(
-        SELECT actor,
-        actor_id,
-        year,
-        films,
         Case when avg_Rating > 8 THEN 'star'
         when avg_Rating > 7 then 'Good'
         when avg_Rating > 6 then 'average'
         else 'bad' end as quality_class
-        from This_year_temp
+        from bootcamp.actor_films
+        Where
+        year = 2000
+        GROUP BY 
+            Actor,
+            Actor_ID,
+            year
 
     )
 
