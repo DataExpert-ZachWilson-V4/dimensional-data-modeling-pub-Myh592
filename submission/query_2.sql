@@ -24,6 +24,7 @@ WITH
                 rating,
                 film_id
                 )) AS Films,
+        avg(rating) as avg_rating,
         Case when avg_Rating > 8 THEN 'star'
         when avg_Rating > 7 then 'Good'
         when avg_Rating > 6 then 'average'
