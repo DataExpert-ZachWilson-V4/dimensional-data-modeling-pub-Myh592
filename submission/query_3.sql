@@ -8,6 +8,6 @@ Create table mymah592.actors_history_scd (
     current_year INTEGER
 )
 WITH (
-    format ='PARQUET'
+    format ='PARQUET',
 partitioning = ARRAY['current_year']
 )
