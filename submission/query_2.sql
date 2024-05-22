@@ -6,8 +6,7 @@ WITH
             actor_ID,
             films,
             quality_class,
-            is_active,
-            year
+            is_active           
         FROM
             mymah592.actors
         WHERE
