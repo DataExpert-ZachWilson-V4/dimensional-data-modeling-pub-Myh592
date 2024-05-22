@@ -39,6 +39,7 @@ WITH
         SELECT actor,
         actor_id,
         year,
+        film,
         films,
         Case when avg_Rating > 8 THEN 'star'
         when avg_Rating > 7 then 'Good'
