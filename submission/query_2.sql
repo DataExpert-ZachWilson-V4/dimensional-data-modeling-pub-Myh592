@@ -7,7 +7,6 @@ WITH
             films,
             quality_class,
             is_active,
-            year
         FROM
             mymah592.actors
         WHERE
@@ -17,7 +16,6 @@ WITH
         SELECT
             actor,
             actor_id,
-            year,
             -- Aggregating all films for an actor in one year
             Array_AGG(ROW(
                 Year,
