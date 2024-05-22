@@ -10,7 +10,7 @@ LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) as qual
 current_year
 From mymah592.actors
 WHERE current_year <= 1999
-)
+),
 -- breaking out streak case statement on its own for neatness
 Streaked AS(
 SELECT
