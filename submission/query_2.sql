@@ -57,7 +57,7 @@ WITH
         WHEN ty.year IS NULL THEN ly.films 
         WHEN ty.year IS NOT NULL and ly.films IS NULL THEN ty.films
        
-        WHEN ty.year IS NOT NULL and ly.films IS NOT NULL THEN ly.files || ty.films
+        WHEN ty.year IS NOT NULL and ly.films IS NOT NULL THEN ly.films || ty.films
 
         END as films,
     COALESCE(ty.quality_class, ly.quality_class) as quality_class,
