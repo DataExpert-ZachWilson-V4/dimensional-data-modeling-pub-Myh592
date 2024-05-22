@@ -20,7 +20,6 @@ WITH
             -- Aggregating all films for an actor in one year
             Array_AGG(ROW(
                 a.Year,
-                a.film,
                 a.votes,
                 a.rating,
                 a.film_id
@@ -46,7 +45,6 @@ WITH
         Array[
             ROW(
             ty.year, 
-            ty.film,
             ty.votes,
             ty.rating,
             ty.film_id
@@ -56,7 +54,6 @@ WITH
         Array[
             ROW(
             ty.year,
-            ty.film,
             ty.votes,
             ty.rating,
             ty.film_id
