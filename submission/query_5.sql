@@ -49,10 +49,12 @@ WITH
                 CAST(
                     ROW(
                         is_active_last_year,
+                        quality_class_last_year,
                         start_year,
                         end_year +1,
                         ) AS ROW(
                             is_active BOOLEAN,
+                            quality_class VARCHAR,
                             start_year INTEGER,
                             end_year INTEGER
                         )
@@ -60,8 +62,9 @@ WITH
             ]
             WHEN did_change = 1 THEN ARRAY[
                 CAST(
-                    ROW(is_active_last_year, start_year, end_year) AS ROW(
+                    ROW(is_active_last_year, quality_class_last_year, start_year, end_year) AS ROW(
                         is_active BOOLEAN,
+                        quality_class VARCHAR,
                         start_year INTEGER,
                         end_year INTEGER
                     )
@@ -69,10 +72,12 @@ WITH
                 CAST(
                     ROW(
                         is_active_this_year,
+                        quality_class_this_year,
                         current_year,
                         current_year
                     ) AS ROW(
                         is_active BOOLEAN,
+                        quality_class VARCHAR,
                         start_year INTEGER,
                         end_year INTEGER
                     )
