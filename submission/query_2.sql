@@ -1,4 +1,3 @@
-INSERT INTO mymah592.Actors
 WITH 
     last_year AS (
         SELECT 
