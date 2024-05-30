@@ -5,9 +5,11 @@ WITH
     Select
         Actor,
         Actor_id,
+        film,
+        votes,
         ARRAY_AGG(ROW(YEAR, film, votes, rating, film_id)) AS films,
-      AVG(rating) AS avg_rating,
-      YEAR
+        AVG(rating) AS avg_rating,
+        YEAR
     FROM
       bootcamp.actor_films
     WHERE
