@@ -21,7 +21,6 @@ WITH
     last_year AS (
         SELECT 
             *
-            year
         FROM
             mymah592.actors
         WHERE
