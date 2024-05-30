@@ -1,4 +1,23 @@
+INSERT INTO mymah592.actors
+    
 WITH 
+    temp as (
+    Select
+        Actor,
+        Actor_id,
+        ARRAY_AGG(ROW(YEAR, film, votes, rating, film_id)) AS films,
+      AVG(rating) AS avg_rating,
+      YEAR
+    FROM
+      bootcamp.actor_films
+    WHERE
+        Year = 2000
+    Group by
+        Actor,
+        actor_ID,
+        Year
+    ),
+        
     last_year AS (
         SELECT 
             Actor,
@@ -16,25 +35,17 @@ WITH
         SELECT actor,
         actor_id,
         year,
-          Array_AGG(ROW(
-                Year,
-                film,
-                votes,
-                rating,
-                film_id
-                )) AS Films,
-        avg(rating) as avg_rating,
-        Case when avg_Rating > 8 THEN 'star'
+        films,
+        Case
+        when avg_Rating > 8 THEN 'star'
         when avg_Rating > 7 then 'Good'
         when avg_Rating > 6 then 'average'
         else 'bad' end as quality_class
         from bootcamp.actor_films
         Where
         year = 2000
-        GROUP BY 
-            Actor,
-            Actor_ID,
-            year
+        FROM 
+            temp
 
     )
 
