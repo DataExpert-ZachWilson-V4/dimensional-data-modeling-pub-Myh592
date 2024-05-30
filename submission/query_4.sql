@@ -11,7 +11,7 @@ WHEN LAG(is_active,1 ) OVER (PARTITION BY actor_id ORDER BY current_year) THEN T
 ELSE FALSE
     END as is_active_last_year,
     CASE
-    WHEN LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) IS NULL THEN 'is ' || quality_class,
+    WHEN LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) IS NULL THEN 'is ' || quality_class
     ELSE LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year)
      end as quality_class_last_year
 current_year
