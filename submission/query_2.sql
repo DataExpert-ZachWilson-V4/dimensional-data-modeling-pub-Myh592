@@ -20,11 +20,7 @@ WITH
         
     last_year AS (
         SELECT 
-            Actor,
-            actor_ID,
-            films,
-            quality_class,
-            is_active,
+            *
             year
         FROM
             mymah592.actors
@@ -40,7 +36,7 @@ WITH
         when avg_Rating > 8 THEN 'star'
         when avg_Rating > 7 then 'Good'
         when avg_Rating > 6 then 'average'
-        else 'bad' end as quality_class
+        else 'bad' end as quality_class,
         from bootcamp.actor_films
         Where
         year = 2000
