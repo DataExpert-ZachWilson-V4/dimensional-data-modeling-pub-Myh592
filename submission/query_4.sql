@@ -9,7 +9,7 @@ Select
     CASE
 WHEN LAG(is_active,1 ) OVER (PARTITION BY actor_id ORDER BY current_year) THEN TRUE
 ELSE FALSE
-    END as is_active_last_year,
+    END as is_active,
     CASE
     WHEN LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) IS NULL THEN 'is ' || quality_class
     ELSE LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year)
