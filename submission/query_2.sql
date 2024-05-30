@@ -17,15 +17,7 @@ WITH
         actor_ID,
         Year
     ),
-        
-    last_year AS (
-        SELECT 
-            *
-        FROM
-            mymah592.actors
-        WHERE
-            current_year = 1999
-        ),
+          
     This_year as(
         SELECT actor,
         actor_id,
@@ -36,13 +28,19 @@ WITH
         when avg_Rating > 7 then 'Good'
         when avg_Rating > 6 then 'average'
         else 'bad' end as quality_class
-        Where
-        year = 2000
         FROM 
             temp
 
-    )
-
+    ),
+    
+    last_year AS (
+        SELECT 
+            *
+        FROM
+            mymah592.actors
+        WHERE
+            current_year = 1999
+        )
 -- COALESCE all the values that are not changing to handle NULLS
     SELECT
     COALESCE(ly.actor, ty.actor) as actor,
