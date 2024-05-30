@@ -3,6 +3,7 @@ WITH lagged AS(
 
 
 Select 
+    actor,
     actor_id,
     quality_class,
     CASE
