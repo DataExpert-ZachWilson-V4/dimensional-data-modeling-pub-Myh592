@@ -7,8 +7,8 @@ Select
     actor_id,
     quality_class,
      CASE
-    WHEN LAG(quality_class) OVER (PARTITION by actor_id ORDER BY current_year) IS NULL THEN 'not ' || quality_class
-    ELSE LAG(quality_class) OVER (PARTITION by actor_id ORDER BY current_year)
+    WHEN LAG(quality_class,1) OVER (PARTITION by actor_id ORDER BY current_year) IS NULL THEN 'not ' || quality_class
+    ELSE LAG(quality_class,1) OVER (PARTITION by actor_id ORDER BY current_year)
     end as quality_class_last_year,
     CASE
         WHEN is_active THEN TRUE
