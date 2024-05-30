@@ -15,7 +15,7 @@ Select
         ELSE FALSE
     END AS is_active,
     CASE
-WHEN LAG(is_active) OVER (PARTITION BY actor_id ORDER BY current_year) THEN TRUE
+WHEN LAG(is_active,1) OVER (PARTITION BY actor_id ORDER BY current_year) THEN TRUE
 ELSE FALSE
     END as is_active_last_year,
     current_year
