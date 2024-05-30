@@ -13,7 +13,7 @@ ELSE FALSE
     CASE
     WHEN LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year) IS NULL THEN 'is ' || quality_class
     ELSE LAG(quality_class,1 ) OVER (PARTITION by actor_id ORDER BY current_year)
-     end as quality_class_last_year
+     end as quality_class_last_year,
 current_year
 From mymah592.actors
 WHERE current_year <= 1999
