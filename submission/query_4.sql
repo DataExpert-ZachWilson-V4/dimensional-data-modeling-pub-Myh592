@@ -13,7 +13,7 @@ Select
     CASE
         When LAG(is_active, 1) Over (Partition by actor_id
         Order by
-        Cuyrrent year) Then 1
+        Current_year) Then 1
         Else 0
         end as is_active_last_year,
     lag(quality_class, 1) Over (Partition by Actor_id
