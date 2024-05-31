@@ -3,8 +3,8 @@ CREATE OR REPLACE TABLE mymah592.actors_history_scd (
     actor_id VARCHAR,
     quality_class VARCHAR,
     is_active BOOLEAN,
-    Start_date INTEGER,
-    End_Date   INTEGER,
+    Start_year INTEGER,
+    End_year   INTEGER,
     current_year INTEGER
 )
 WITH (
