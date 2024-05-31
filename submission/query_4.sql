@@ -11,8 +11,8 @@ Select
     ELSE LAG(quality_class,1) OVER (PARTITION by actor_id ORDER BY current_year)
     end as quality_class_last_year,
     CASE
-        WHEN is_active THEN TRUE
-        ELSE FALSE
+        WHEN is_active THEN 1
+        ELSE 0
     END AS is_active,
     CASE
 WHEN LAG(is_active,1) OVER (PARTITION BY actor_id ORDER BY current_year) THEN TRUE
