@@ -42,6 +42,7 @@ WITH
     ),
     Changes AS(
         SELECT
+          actor,
           actor_ID,
           current_year,
           CASE
