@@ -86,11 +86,12 @@ WITH
             WHEN did_change IS NULL Then ARRAY[
                 CAST(
                     ROW(
-                        COALESCE(is_active_last_year, is_active_this_year),
+                        COALESCE(is_active_last_year, is_active_this_year),COALESCE(quality_class_last_year, quality_class_this_year), 
                         start_year,
                         end_year
                     ) AS ROW(
                         is_active BOOLEAN,
+                        quality_class VARCHAR,
                         start_year INTEGER,
                         end_year INTEGER
                     )
