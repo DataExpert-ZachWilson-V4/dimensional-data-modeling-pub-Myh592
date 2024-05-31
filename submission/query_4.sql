@@ -29,7 +29,7 @@ Streaked AS(
 SELECT
   *,
   SUM(CASE 
-        WHEN is_active <> is_active_last_year THEN or
+        WHEN is_active <> is_active_last_year or
         quality_class <> quality_class_last_year THEN 1 
       ELSE 0 END )
     OVER(PARTITION BY actor_id ORDER BY current_year) AS Streak_identifier
