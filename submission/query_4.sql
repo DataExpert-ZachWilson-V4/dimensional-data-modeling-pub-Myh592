@@ -5,6 +5,7 @@ WITH lagged AS(
 Select 
     actor,
     actor_id,
+    films,
     quality_class,
      CASE
        WHEN is_active Then 1
