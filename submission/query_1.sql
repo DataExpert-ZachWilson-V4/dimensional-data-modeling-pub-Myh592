@@ -2,7 +2,7 @@
 CREATE OR REPLACE TABLE mymah592.Actors (
     actor VARCHAR,
     actor_ID VARCHAR,
-    films ARRAY<ROW(Year INTEGER, film VARCHAR, votes INTEGER, rating DOUBLE, film_id VARCHAR)>,
+    films ARRAY<ROW(film VARCHAR, votes INTEGER, rating DOUBLE, film_id VARCHAR, Year INTEGER)>,
     quality_class VARCHAR,
     is_active BOOLEAN,
     current_year INTEGER
