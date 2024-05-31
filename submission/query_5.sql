@@ -102,6 +102,7 @@ WITH
             combined
     )
     SELECT
+    actor,
     actor_id,
     ARR.quality_class,
     ARR.is_active,
