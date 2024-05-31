@@ -18,6 +18,7 @@ WITH
     ),
     Combined AS(
         SELECT
+        COALESCE(ly.actor, cy.actor) AS actor,   
         COALESCE(ly.actor_ID, cy.actor_ID) AS actor_ID,
         COALESCE(ly.start_year, cy.start_year) AS start_year,
         COALESCE(ly.end_year, cy.end_year) AS end_year,
