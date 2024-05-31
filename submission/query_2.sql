@@ -5,7 +5,7 @@ WITH
     Select
         Actor,
         Actor_id,
-        ARRAY_AGG(ROW(YEAR, film, votes, rating, film_id)) AS films,
+        ARRAY_AGG(ROW(film, votes, rating, film_id, YEAR)) AS films,
         AVG(rating) AS avg_rating,
         YEAR
     FROM
